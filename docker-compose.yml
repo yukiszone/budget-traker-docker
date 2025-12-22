@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  # SERVIZIO 1: DATABASE
+  mongo_db:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+
+  # SERVIZIO 2: BACKEND (Python)
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongo_db
+    environment:
+      # Qui diciamo al backend di connettersi al servizio 'mongo_db'
+      MONGO_URL: mongodb://mongo_db:27017
+    volumes:
+      - ./backend:/app
+
+  # SERVIZIO 3: FRONTEND (React)
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
