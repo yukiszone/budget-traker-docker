@@ -32,4 +32,4 @@ jobs:
 
     # 5. Prova a lanciare tutto con Docker Compose
     - name: Test Docker Compose Configuration
-      run: docker-compose config
+      run: docker compose config
