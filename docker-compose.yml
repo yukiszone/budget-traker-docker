@@ -6,6 +6,8 @@ services:
     image: mongo:latest
     ports:
       - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
 
   # SERVIZIO 2: BACKEND (Python)
   backend:
@@ -15,7 +17,6 @@ services:
     depends_on:
       - mongo_db
     environment:
-      # Qui diciamo al backend di connettersi al servizio 'mongo_db'
       MONGO_URL: mongodb://mongo_db:27017
     volumes:
       - ./backend:/app
@@ -30,3 +31,6 @@ services:
     volumes:
       - ./frontend:/app
       - /app/node_modules
+
+volumes:
+  mongo_data:
