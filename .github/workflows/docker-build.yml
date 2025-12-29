@@ -1,0 +1,35 @@
+name: Docker CI Build
+
+# Ogni volta che fai push sul ramo 'main'
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+
+jobs:
+  build-and-test:
+    # Usa un server Linux virtuale (gratis offerto da GitHub)
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Scarica il codice
+    - name: Checkout del codice
+      uses: actions/checkout@v3
+
+    # 2. Configura Docker 
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    # 3. Prova a costruire il Backend
+    - name: Build Backend Image
+      run: docker build ./backend -t budget-backend:latest
+
+    # 4. Prova a costruire il Frontend
+    - name: Build Frontend Image
+      run: docker build ./frontend -t budget-frontend:latest
+
+    # 5. Prova a lanciare tutto con Docker Compose
+    - name: Test Docker Compose Configuration
+      run: docker-compose config
