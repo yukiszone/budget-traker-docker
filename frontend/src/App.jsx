@@ -54,7 +54,7 @@ function App() {
 
   return (
     <div style={{ padding: "40px", fontFamily: "sans-serif", maxWidth: "600px", margin: "0 auto" }}>
-      <h1 style={{ color: "#2c3e50", textAlign: "center" }}>💰 Budget Tracker</h1>
+      <h1 style={{ color: "#2c3e50", textAlign: "center" }}>Budget Tracker</h1>
       
       {/* BOX TOTALE */}
       <div style={{ 
